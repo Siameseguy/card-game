@@ -1,0 +1,16 @@
+{
+	"name": "war-card-game",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"test": "mocha ./tests  --watch"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"chai": "^4.2.0",
+		"mocha": "^5.2.0"
+	}
+}
