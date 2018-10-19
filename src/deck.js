@@ -55,17 +55,14 @@ module.exports = class Deck {
       if (i % 2 != 0) {
         this
           .playerOneHand
-          .push(this.deck[i]);
+          .push(this.deck[i])
       } else {
         this
           .playerTwoHand
-          .push(this.deck[i]);
+          .push(this.deck[i])
       }
     }
-
     return this.deck = [];
+
   }
 }
-
-// let newDeck = new Deck(); newDeck.createDeck(); newDeck.shuffle();
-// console.log(newDeck.dealCards());
