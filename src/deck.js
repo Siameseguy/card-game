@@ -1,6 +1,8 @@
 module.exports = class Deck {
   constructor() {
     this.deck = [];
+    this.playerOneHand = [];
+    this.playerTwoHand = [];
   }
 
   card(value, suite) {
@@ -47,4 +49,23 @@ module.exports = class Deck {
     }
     return this.deck;
   }
+
+  dealCards() {
+    for (let i = 0; i < this.deck.length; i++) {
+      if (i % 2 != 0) {
+        this
+          .playerOneHand
+          .push(this.deck[i]);
+      } else {
+        this
+          .playerTwoHand
+          .push(this.deck[i]);
+      }
+    }
+
+    return this.deck = [];
+  }
 }
+
+// let newDeck = new Deck(); newDeck.createDeck(); newDeck.shuffle();
+// console.log(newDeck.dealCards());
