@@ -32,18 +32,19 @@ module.exports = class Deck {
       }
     }
 
-    this.shuffle();
-
     return this.deck;
   }
 
   shuffle() {
-    return this
-      .deck
-      .sort(() => {
-        return 0.5 - Math.random()
-      });
+    var m = this.deck.length,
+      t,
+      i;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = this.deck[m];
+      this.deck[m] = this.deck[i];
+      this.deck[i] = t;
+    }
+    return this.deck;
   }
 }
-
-//let newDeck = new Deck(); console.log(newDeck.createDeck());
