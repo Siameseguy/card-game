@@ -10,7 +10,7 @@ module.exports = class Deck {
   }
 
   createDeck() {
-    let suite = ["spades", "hearts", "diamonds", "clovers"];
+    let suite = ["spades", "hearts", "diamonds", "clubs"];
     const number = [
       "2",
       "3",
