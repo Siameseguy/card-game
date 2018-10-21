@@ -70,10 +70,11 @@ module.exports = class Deck {
     return this.deck;
   }
 
-  showPlayerHand(player) {
-    return player;
+  showPlayerOneHand(player) {
+    return this.playerOneHand;
+  }
+
+  showPlayerTwoHand(player) {
+    return this.playerTwoHand;
   }
 }
-
-// let newDeck = new Deck(); newDeck.createDeck(); newDeck.shuffle();
-// console.log(newDeck.dealCards())
