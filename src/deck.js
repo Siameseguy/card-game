@@ -91,7 +91,7 @@ module.exports = class Deck {
   // show player hand
   showPlayerHand(id) {
     if (id < 1) 
-      return 'Please use an number larger than 0.';
+      return 'Please use a number larger than 0.';
     if (isNaN(id)) 
       return 'Invalid input.';
     let num = id - 1;
