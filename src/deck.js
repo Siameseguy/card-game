@@ -1,8 +1,22 @@
-module.exports = class Deck {
+class Deck {
   constructor() {
     this.deck = [];
-    this.playerOneHand = [];
-    this.playerTwoHand = [];
+    this.players = [];
+    // this.playerOneHand = []; this.playerTwoHand = [];
+  }
+
+  // create number of players
+  createPlayers(num) {
+    for (let i = 0; i < num; i++) {
+      let hand = [];
+      let player = {
+        id: i + 1,
+        hand: hand
+      }
+      this
+        .players
+        .push(player);
+    }
   }
 
   // format cards to have value and suite
@@ -55,18 +69,18 @@ module.exports = class Deck {
 
   // deal cards to two players, alternating while removing cards from deck
   dealCards() {
-    let counter = 0;
-    while (this.deck.length) {
-      if (counter % 2 != 0) {
+    let count = 0;
+    while (this.deck.length != 0) {
+      for (let i = 0; i < this.players.length; i++) {
+        let card = this
+          .deck
+          .shift(count);
         this
-          .playerOneHand
-          .push(this.deck.shift(this.deck[counter]))
-      } else {
-        this
-          .playerTwoHand
-          .push(this.deck.shift(this.deck[counter]))
+          .players[i]
+          .hand
+          .push(card);
       }
-      counter++
+      count++;
     }
   }
 
@@ -75,13 +89,19 @@ module.exports = class Deck {
     return this.deck;
   }
 
-  // show player one hand
-  showPlayerOneHand(player) {
-    return this.playerOneHand;
-  }
-
-  // show player two hand
-  showPlayerTwoHand(player) {
-    return this.playerTwoHand;
+  // show player hand
+  showPlayerHand(id) {
+    if (id < 1) 
+      return 'Please use an number larger than 0.';
+    let num = id - 1;
+    return `Player ${id}'s hand is ${this.players[num].hand}.`;
   }
 }
+
+let newDeck = new Deck();
+newDeck.createDeck();
+newDeck.shuffle();
+newDeck.createPlayers(3)
+newDeck.dealCards()
+
+console.log(newDeck.showPlayerHand(2));
