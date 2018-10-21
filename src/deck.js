@@ -1,22 +1,7 @@
-class Deck {
+module.exports = class Deck {
   constructor() {
     this.deck = [];
     this.players = [];
-    // this.playerOneHand = []; this.playerTwoHand = [];
-  }
-
-  // create number of players
-  createPlayers(num) {
-    for (let i = 0; i < num; i++) {
-      let hand = [];
-      let player = {
-        id: i + 1,
-        hand: hand
-      }
-      this
-        .players
-        .push(player);
-    }
   }
 
   // format cards to have value and suite
@@ -67,18 +52,32 @@ class Deck {
     return this.deck;
   }
 
-  // deal cards to two players, alternating while removing cards from deck
+  // create number of players
+  createPlayers(num) {
+    if (num === 0) 
+      return 'There must be a least one player.'
+    if (isNaN(num)) 
+      return 'Invalid input.'
+    for (let i = 0; i < num; i++) {
+      let hand = [];
+      let player = {
+        id: i + 1,
+        hand: hand
+      }
+      this
+        .players
+        .push(player);
+    }
+  }
+
+  // deal cards to players, alternating while removing cards from deck
   dealCards() {
     let count = 0;
     while (this.deck.length != 0) {
-      for (let i = 0; i < this.players.length; i++) {
-        let card = this
-          .deck
-          .shift(count);
-        this
-          .players[i]
+      for (let player of this.players) {
+        player
           .hand
-          .push(card);
+          .push(this.deck.shift(count));
       }
       count++;
     }
@@ -93,15 +92,14 @@ class Deck {
   showPlayerHand(id) {
     if (id < 1) 
       return 'Please use an number larger than 0.';
+    if (isNaN(id)) 
+      return 'Invalid input.';
     let num = id - 1;
     return `Player ${id}'s hand is ${this.players[num].hand}.`;
   }
+
+  // show all players
+  showPlayers() {
+    return this.players;
+  }
 }
-
-let newDeck = new Deck();
-newDeck.createDeck();
-newDeck.shuffle();
-newDeck.createPlayers(3)
-newDeck.dealCards()
-
-console.log(newDeck.showPlayerHand(2));

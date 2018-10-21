@@ -8,18 +8,23 @@ describe('Deck', () => {
       newDeck = new Deck();
     })
 
-    it('should have a function called createDeck', () => {
-      expect(typeof newDeck.createDeck)
-        .to
-        .equal('function');
-    })
     it('should have a function called card', () => {
       expect(typeof newDeck.card)
         .to
         .equal('function');
     })
+    it('should have a function called createDeck', () => {
+      expect(typeof newDeck.createDeck)
+        .to
+        .equal('function');
+    })
     it('should have a function called shuffle', () => {
       expect(typeof newDeck.shuffle)
+        .to
+        .equal('function');
+    })
+    it('should have a function called createPlayers', () => {
+      expect(typeof newDeck.createPlayers)
         .to
         .equal('function');
     })
@@ -33,13 +38,13 @@ describe('Deck', () => {
         .to
         .equal('function');
     })
-    it('should have a function called showPlayerOneHand', () => {
-      expect(typeof newDeck.showPlayerOneHand)
+    it('should have a function called showPlayerHand', () => {
+      expect(typeof newDeck.showPlayerHand)
         .to
         .equal('function');
     })
-    it('should have a function called showPlayerTwoHand', () => {
-      expect(typeof newDeck.showPlayerTwoHand)
+    it('should have a function called showPlayers', () => {
+      expect(typeof newDeck.showPlayers)
         .to
         .equal('function');
     })
@@ -141,73 +146,92 @@ describe('Deck', () => {
     })
   })
 
+  describe('createPlayers', () => {
+    before(() => {
+      newDeck.createPlayers(3)
+    })
+    it('should have 3 players in players array', () => {
+      expect(newDeck.showPlayers().length)
+        .to
+        .equal(3);
+    })
+    it('should throw error if number of players is less than 1', () => {
+      expect(newDeck.createPlayers(0))
+        .to
+        .equal('There must be a least one player.')
+    })
+    it('should throw error if number is not a number', () => {
+      expect(newDeck.createPlayers('B'))
+        .to
+        .equal('Invalid input.')
+    })
+  })
+
   describe('dealCards', () => {
     before(() => {
       newDeck.dealCards();
     })
-    it('should deal cards till deck is empty', () => {
+    it('should deal all available cards to players', () => {
       expect(newDeck.showDeck().length)
         .to
         .equal(0);
-    });
+    })
+    it('should deal cards to all players', () => {
+      for (let i = 0; i <= 3; i++) {
+        expect(newDeck.showPlayerHand(i))
+          .to
+          .not
+          .equal([]);
+      }
+    })
   })
 
   describe('showDeck', () => {
-    it('should return an array', () => {
+    it('should be an array', () => {
       expect(newDeck.showDeck())
         .to
         .be
-        .an('array');
+        .an('array')
     })
-    it('should return a deck full of cards', () => {
+    it('should return the deck state', () => {
       expect(newDeck.showDeck())
         .to
         .not
-        .equal([]);
+        .equal('')
     })
   })
 
-  describe('showPlayerOneHand', () => {
-    it('should return an array', () => {
-      expect(newDeck.showPlayerOneHand())
+  describe('showPlayerHand', () => {
+    it('should return a string', () => {
+      expect(newDeck.showPlayerHand(1))
         .to
         .be
-        .an('array');
+        .an('string')
     })
-
-    it('not be empty after cards are dealt', () => {
-      expect(newDeck.showPlayerOneHand())
+    it('should not be an invalid id', () => {
+      expect(newDeck.showPlayerHand(0))
         .to
-        .not
-        .equal([])
+        .equal('Please use an number larger than 0.')
     })
-
-    it('should have a length of 26', () => {
-      expect(newDeck.showPlayerOneHand().length)
+    it('should throw error if id is not a number', () => {
+      expect(newDeck.showPlayerHand('B'))
         .to
-        .equal(26);
+        .equal('Invalid input.')
     })
   })
 
-  describe('showPlayerTwoHand', () => {
-    it('should return an array', () => {
-      expect(newDeck.showPlayerTwoHand())
+  describe('showPlayers', () => {
+    it('should return players array', () => {
+      expect(newDeck.showPlayers())
         .to
         .be
-        .an('array');
+        .an('array')
     })
-
-    it('not be empty after cards are dealt', () => {
-      expect(newDeck.showPlayerTwoHand())
+    it('should not be empty if there are players created', () => {
+      expect(newDeck.showPlayers().length)
         .to
         .not
-        .equal([])
-    })
-
-    it('should have a length of 26', () => {
-      expect(newDeck.showPlayerOneHand().length)
-        .to
-        .equal(26);
+        .equal(0)
     })
   })
 
