@@ -5,10 +5,12 @@ module.exports = class Deck {
     this.playerTwoHand = [];
   }
 
+  // format cards to have value and suite
   card(value, suite) {
     return value + ' of ' + suite;
   }
 
+  // create deck with suites and numbers
   createDeck() {
     let suite = ["spades", "hearts", "diamonds", "clubs"];
     const number = [
@@ -37,6 +39,7 @@ module.exports = class Deck {
     return this.deck;
   }
 
+  // shuffle deck using fisher-yates algorithm
   shuffle() {
     var m = this.deck.length,
       t,
@@ -50,6 +53,7 @@ module.exports = class Deck {
     return this.deck;
   }
 
+  // deal cards to two players, alternating while removing cards from deck
   dealCards() {
     let counter = 0;
     while (this.deck.length) {
@@ -66,14 +70,17 @@ module.exports = class Deck {
     }
   }
 
+  // show deck at current state
   showDeck() {
     return this.deck;
   }
 
+  // show player one hand
   showPlayerOneHand(player) {
     return this.playerOneHand;
   }
 
+  // show player two hand
   showPlayerTwoHand(player) {
     return this.playerTwoHand;
   }
